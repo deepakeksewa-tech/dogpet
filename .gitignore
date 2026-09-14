@@ -1,0 +1,44 @@
+<<<<<<< HEAD
+node_modules/
+**/node_modules/
+
+.env
+**/.env
+BACKEND/.env
+
+dist/
+build/
+
+.vscode/
+.idea/
+
+.DS_Store
+Thumbs.db
+
+*.log
+=======
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+>>>>>>> 84dcd5ed826b24f9d67aa9c44a641278e34643f9

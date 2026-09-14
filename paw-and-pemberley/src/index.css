@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  /* Luxury British Palette */
+  --color-ivory: #F7F4EE;
+  --color-cream: #EFE9DE;
+  --color-charcoal: #1E211E;
+  --color-sage: #7B8875;
+  --color-forest: #354438;
+  --color-gold-light: #D4BF95;
+  --color-gold: #B89B65;
+  --color-gold-dark: #937845;
+
+  /* Typography */
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
+
+  /* Letter Spacing */
+  --tracking-widest: 0.22em;
+  --tracking-luxury: 0.16em;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F4EE;
+}
+::-webkit-scrollbar-thumb {
+  background: #7B8875;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #354438;
+}
+
+html {
+  scroll-behavior: smooth;
+}
