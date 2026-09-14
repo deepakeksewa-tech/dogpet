@@ -163,7 +163,7 @@ export default function Booking() {
       console.log('📩 Sending consultation request...');
 
       const response = await fetch(
-        'https://health-care-system-vv00.onrender.com/api/booking',
+        'https://dogpet-1.onrender.com/api/booking',
         {
           method: 'POST',
           headers: {

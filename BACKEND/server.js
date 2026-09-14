@@ -14,7 +14,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://pet-sigma-brown.vercel.app/",
+      "https://dogpet-1dc2.vercel.app/",
       "http://localhost:5173",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
