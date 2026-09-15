@@ -182,3 +182,8 @@
     border-right-color: var(--border);
   }
 }
+
+/* Is tarah ka rule agar hoga toh font bada nahi hone dega */
+body, p, span, h1, h2, h3 {
+  font-size: 11px !important;
+}

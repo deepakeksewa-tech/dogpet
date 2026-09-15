@@ -27,7 +27,7 @@ export default function About() {
               LEFT — STORY
           ================================= */}
 
-          <div className="lg:col-span-6 space-y-5 text-charcoal/80 font-sans font-light text-sm leading-relaxed">
+          <div className="lg:col-span-6 space-y-5 text-charcoal/90 font-sans text-base leading-relaxed">
 
             {/* Quote */}
             <p className="font-serif text-2xl sm:text-3xl text-charcoal italic leading-snug">
@@ -50,7 +50,7 @@ export default function About() {
             </p>
 
             {/* Care Standards */}
-            <p className="text-xs text-charcoal/70">
+            <p className="text-sm sm:text-base text-charcoal/80 leading-relaxed">
               Every carer within our circle is DBS-checked, vet-first-aid
               certified, and trained in gentle behavioural communication —
               ensuring uncompromised standards of care and discretion.
@@ -76,7 +76,7 @@ export default function About() {
             </div>
 
             {/* Founder Caption */}
-            <p className="text-[11px] text-sage font-sans uppercase tracking-widest mt-3 text-center lg:text-left">
+            <p className="text-xs uppercase tracking-widest text-sage font-sans font-semibold mt-3 text-center lg:text-left">
               Eleanor Pemberley-Cross • Founder & Head of Care
             </p>
 
@@ -98,13 +98,13 @@ export default function About() {
           />
 
           {/* Locations Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
 
             {LOCATIONS.map((loc, idx) => (
               <div
                 key={idx}
                 className="
-                  p-5
+                  p-6
                   bg-cream/30
                   border
                   border-cream
@@ -115,17 +115,17 @@ export default function About() {
               >
 
                 {/* Region */}
-                <span className="text-[10px] uppercase tracking-widest text-gold font-sans font-semibold">
+                <span className="text-xs uppercase tracking-widest text-gold font-sans font-bold block mb-1.5">
                   {loc.region}
                 </span>
 
                 {/* Location */}
-                <h4 className="font-serif text-xl text-charcoal font-medium mt-1 mb-1.5">
+                <h4 className="font-serif text-xl sm:text-2xl text-charcoal font-medium mt-1 mb-2">
                   {loc.name}
                 </h4>
 
                 {/* Description */}
-                <p className="text-xs font-sans text-charcoal/70 font-light leading-relaxed">
+                <p className="text-sm sm:text-base font-sans text-charcoal/85 leading-relaxed">
                   {loc.desc}
                 </p>
 

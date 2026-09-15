@@ -8,18 +8,24 @@ export default function SectionHeading({ eyebrow, title, subtitle, centered = fa
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className={`mb-12 md:mb-16 ${centered ? 'text-center max-w-2xl mx-auto' : 'max-w-3xl'}`}
+      className={`mb-12 md:mb-16 ${centered ? 'text-center max-w-3xl mx-auto' : 'max-w-4xl'}`}
     >
       {eyebrow && (
-        <span className="text-[11px] uppercase tracking-widest text-gold font-sans font-semibold mb-3 block">
+        <span 
+          style={{ fontSize: '13px' }} 
+          className="uppercase tracking-[0.2em] text-gold font-sans font-bold mb-3 block"
+        >
           {eyebrow}
         </span>
       )}
-      <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-charcoal leading-[1.15] mb-4">
+      <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-charcoal leading-[1.2] mb-4">
         {title}
       </h2>
       {subtitle && (
-        <p className="font-sans text-sm sm:text-base text-charcoal/70 font-light leading-relaxed">
+        <p 
+          style={{ fontSize: '16px' }} 
+          className="font-sans text-charcoal/85 font-normal leading-relaxed"
+        >
           {subtitle}
         </p>
       )}

@@ -255,7 +255,7 @@ export default function Booking() {
         {/* =========================
             STEP PROGRESS
         ========================= */}
-        <div className="flex justify-between items-center mb-10 border-b border-cream pb-6 overflow-x-auto gap-2">
+        <div className="flex justify-between items-center mb-10 border-b border-cream pb-6 overflow-x-auto gap-3">
           {stepsList.map((label, idx) => {
             const stepNum = idx + 1;
             const active = step === stepNum;
@@ -264,25 +264,25 @@ export default function Booking() {
             return (
               <div
                 key={idx}
-                className="flex items-center gap-2 shrink-0"
+                className="flex items-center gap-2.5 shrink-0"
               >
                 <span
-                  className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono transition-colors ${
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-mono font-medium transition-colors ${
                     active
                       ? 'bg-forest text-white'
                       : completed
                       ? 'bg-gold text-white'
-                      : 'bg-cream text-charcoal/50'
+                      : 'bg-cream text-charcoal/60'
                   }`}
                 >
-                  {completed ? <Check size={10} /> : stepNum}
+                  {completed ? <Check size={14} /> : stepNum}
                 </span>
 
                 <span
-                  className={`text-[9px] uppercase tracking-widest hidden md:inline ${
+                  className={`text-xs uppercase tracking-wider hidden md:inline ${
                     active
-                      ? 'text-charcoal font-semibold'
-                      : 'text-charcoal/40'
+                      ? 'text-charcoal font-bold'
+                      : 'text-charcoal/50 font-medium'
                   }`}
                 >
                   {label}
@@ -295,7 +295,7 @@ export default function Booking() {
         {/* =========================
             FORM CARD
         ========================= */}
-        <div className="bg-white/50 border border-cream p-8 sm:p-12 shadow-xs rounded-xs">
+        <div className="bg-white/60 border border-cream p-8 sm:p-12 shadow-xs rounded-xs">
 
           {/* =========================
               SUCCESS SCREEN
@@ -303,15 +303,15 @@ export default function Booking() {
           {isSubmitted ? (
             <div className="text-center py-10 space-y-4">
 
-              <div className="w-12 h-12 bg-forest/10 text-forest mx-auto rounded-full flex items-center justify-center">
-                <Check size={24} />
+              <div className="w-14 h-14 bg-forest/10 text-forest mx-auto rounded-full flex items-center justify-center">
+                <Check size={28} />
               </div>
 
-              <h3 className="font-serif text-3xl text-charcoal">
+              <h3 className="font-serif text-3xl sm:text-4xl text-charcoal font-medium">
                 Consultation Lodged
               </h3>
 
-              <p className="text-xs font-sans text-charcoal/70 max-w-md mx-auto leading-relaxed font-light">
+              <p className="text-base font-sans text-charcoal/80 max-w-md mx-auto leading-relaxed">
                 Thank you, <strong>{formData.name}</strong>. Our concierge
                 director will review{' '}
                 <strong>{formData.petName}'s</strong> profile and reach out
@@ -322,7 +322,7 @@ export default function Booking() {
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="px-6 py-2.5 bg-charcoal text-cream text-[11px] uppercase tracking-luxury hover:bg-charcoal/80 transition-colors"
+                  className="px-7 py-3 bg-charcoal text-cream text-xs sm:text-sm uppercase tracking-wider font-semibold hover:bg-charcoal/80 transition-colors"
                 >
                   Schedule Another Consultation
                 </button>
@@ -334,9 +334,9 @@ export default function Booking() {
                   SUBMISSION ERROR
               ========================= */}
               {errors.submit && (
-                <div className="mb-6 border border-red-200 bg-red-50/40 px-4 py-3">
-                  <p className="flex items-center gap-2 text-xs text-red-600">
-                    <AlertCircle size={14} />
+                <div className="mb-6 border border-red-200 bg-red-50/60 px-4 py-3">
+                  <p className="flex items-center gap-2 text-sm text-red-600 font-medium">
+                    <AlertCircle size={16} />
                     {errors.submit}
                   </p>
                 </div>
@@ -348,7 +348,7 @@ export default function Booking() {
               {step === 1 && (
                 <div className="space-y-6">
 
-                  <h3 className="font-serif text-2xl text-charcoal">
+                  <h3 className="font-serif text-2xl sm:text-3xl text-charcoal font-medium">
                     1. About You
                   </h3>
 
@@ -356,7 +356,7 @@ export default function Booking() {
 
                     {/* NAME */}
                     <div>
-                      <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
+                      <label className="block text-xs uppercase tracking-wider font-sans font-bold text-charcoal/90 mb-2">
                         Full Name <span className="text-red-600">*</span>
                       </label>
 
@@ -365,7 +365,7 @@ export default function Booking() {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className={`w-full bg-ivory border px-4 py-3 text-xs text-charcoal focus:outline-none transition-colors ${
+                        className={`w-full bg-ivory border px-4 py-3 text-sm sm:text-base text-charcoal focus:outline-none transition-colors ${
                           errors.name
                             ? 'border-red-500 bg-red-50/20'
                             : 'border-cream focus:border-forest'
@@ -374,8 +374,8 @@ export default function Booking() {
                       />
 
                       {errors.name && (
-                        <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1.5">
-                          <AlertCircle size={12} />
+                        <p className="flex items-center gap-1.5 text-xs text-red-600 font-medium mt-1.5">
+                          <AlertCircle size={14} />
                           {errors.name}
                         </p>
                       )}
@@ -383,7 +383,7 @@ export default function Booking() {
 
                     {/* EMAIL */}
                     <div>
-                      <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
+                      <label className="block text-xs uppercase tracking-wider font-sans font-bold text-charcoal/90 mb-2">
                         Email Address <span className="text-red-600">*</span>
                       </label>
 
@@ -392,7 +392,7 @@ export default function Booking() {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`w-full bg-ivory border px-4 py-3 text-xs text-charcoal focus:outline-none transition-colors ${
+                        className={`w-full bg-ivory border px-4 py-3 text-sm sm:text-base text-charcoal focus:outline-none transition-colors ${
                           errors.email
                             ? 'border-red-500 bg-red-50/20'
                             : 'border-cream focus:border-forest'
@@ -401,8 +401,8 @@ export default function Booking() {
                       />
 
                       {errors.email && (
-                        <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1.5">
-                          <AlertCircle size={12} />
+                        <p className="flex items-center gap-1.5 text-xs text-red-600 font-medium mt-1.5">
+                          <AlertCircle size={14} />
                           {errors.email}
                         </p>
                       )}
@@ -413,7 +413,7 @@ export default function Booking() {
 
                     {/* PHONE */}
                     <div>
-                      <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
+                      <label className="block text-xs uppercase tracking-wider font-sans font-bold text-charcoal/90 mb-2">
                         Telephone <span className="text-red-600">*</span>
                       </label>
 
@@ -422,7 +422,7 @@ export default function Booking() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className={`w-full bg-ivory border px-4 py-3 text-xs text-charcoal focus:outline-none transition-colors ${
+                        className={`w-full bg-ivory border px-4 py-3 text-sm sm:text-base text-charcoal focus:outline-none transition-colors ${
                           errors.phone
                             ? 'border-red-500 bg-red-50/20'
                             : 'border-cream focus:border-forest'
@@ -431,8 +431,8 @@ export default function Booking() {
                       />
 
                       {errors.phone && (
-                        <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1.5">
-                          <AlertCircle size={12} />
+                        <p className="flex items-center gap-1.5 text-xs text-red-600 font-medium mt-1.5">
+                          <AlertCircle size={14} />
                           {errors.phone}
                         </p>
                       )}
@@ -440,7 +440,7 @@ export default function Booking() {
 
                     {/* POSTCODE */}
                     <div>
-                      <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
+                      <label className="block text-xs uppercase tracking-wider font-sans font-bold text-charcoal/90 mb-2">
                         Postcode / Area <span className="text-red-600">*</span>
                       </label>
 
@@ -449,7 +449,7 @@ export default function Booking() {
                         name="postcode"
                         value={formData.postcode}
                         onChange={handleChange}
-                        className={`w-full bg-ivory border px-4 py-3 text-xs text-charcoal focus:outline-none transition-colors ${
+                        className={`w-full bg-ivory border px-4 py-3 text-sm sm:text-base text-charcoal focus:outline-none transition-colors ${
                           errors.postcode
                             ? 'border-red-500 bg-red-50/20'
                             : 'border-cream focus:border-forest'
@@ -458,8 +458,8 @@ export default function Booking() {
                       />
 
                       {errors.postcode && (
-                        <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1.5">
-                          <AlertCircle size={12} />
+                        <p className="flex items-center gap-1.5 text-xs text-red-600 font-medium mt-1.5">
+                          <AlertCircle size={14} />
                           {errors.postcode}
                         </p>
                       )}
@@ -474,7 +474,7 @@ export default function Booking() {
               {step === 2 && (
                 <div className="space-y-6">
 
-                  <h3 className="font-serif text-2xl text-charcoal">
+                  <h3 className="font-serif text-2xl sm:text-3xl text-charcoal font-medium">
                     2. About Your Companion
                   </h3>
 
@@ -482,7 +482,7 @@ export default function Booking() {
 
                     {/* PET NAME */}
                     <div>
-                      <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
+                      <label className="block text-xs uppercase tracking-wider font-sans font-bold text-charcoal/90 mb-2">
                         Pet's Name <span className="text-red-600">*</span>
                       </label>
 
@@ -491,7 +491,7 @@ export default function Booking() {
                         name="petName"
                         value={formData.petName}
                         onChange={handleChange}
-                        className={`w-full bg-ivory border px-4 py-3 text-xs text-charcoal focus:outline-none transition-colors ${
+                        className={`w-full bg-ivory border px-4 py-3 text-sm sm:text-base text-charcoal focus:outline-none transition-colors ${
                           errors.petName
                             ? 'border-red-500 bg-red-50/20'
                             : 'border-cream focus:border-forest'
@@ -500,8 +500,8 @@ export default function Booking() {
                       />
 
                       {errors.petName && (
-                        <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1.5">
-                          <AlertCircle size={12} />
+                        <p className="flex items-center gap-1.5 text-xs text-red-600 font-medium mt-1.5">
+                          <AlertCircle size={14} />
                           {errors.petName}
                         </p>
                       )}
@@ -509,7 +509,7 @@ export default function Booking() {
 
                     {/* PET TYPE */}
                     <div>
-                      <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
+                      <label className="block text-xs uppercase tracking-wider font-sans font-bold text-charcoal/90 mb-2">
                         Pet Type / Breed <span className="text-red-600">*</span>
                       </label>
 
@@ -518,7 +518,7 @@ export default function Booking() {
                         name="petType"
                         value={formData.petType}
                         onChange={handleChange}
-                        className={`w-full bg-ivory border px-4 py-3 text-xs text-charcoal focus:outline-none transition-colors ${
+                        className={`w-full bg-ivory border px-4 py-3 text-sm sm:text-base text-charcoal focus:outline-none transition-colors ${
                           errors.petType
                             ? 'border-red-500 bg-red-50/20'
                             : 'border-cream focus:border-forest'
@@ -527,8 +527,8 @@ export default function Booking() {
                       />
 
                       {errors.petType && (
-                        <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1.5">
-                          <AlertCircle size={12} />
+                        <p className="flex items-center gap-1.5 text-xs text-red-600 font-medium mt-1.5">
+                          <AlertCircle size={14} />
                           {errors.petType}
                         </p>
                       )}
@@ -537,7 +537,7 @@ export default function Booking() {
 
                   {/* PET AGE */}
                   <div>
-                    <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
+                    <label className="block text-xs uppercase tracking-wider font-sans font-bold text-charcoal/90 mb-2">
                       Pet Age & Temperament (Optional)
                     </label>
 
@@ -546,7 +546,7 @@ export default function Booking() {
                       name="petAge"
                       value={formData.petAge}
                       onChange={handleChange}
-                      className="w-full bg-ivory border border-cream px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-forest"
+                      className="w-full bg-ivory border border-cream px-4 py-3 text-sm sm:text-base text-charcoal focus:outline-none focus:border-forest"
                       placeholder="e.g. 4 Years Old, calm and social"
                     />
                   </div>
@@ -559,12 +559,12 @@ export default function Booking() {
               {step === 3 && (
                 <div className="space-y-6">
 
-                  <h3 className="font-serif text-2xl text-charcoal">
+                  <h3 className="font-serif text-2xl sm:text-3xl text-charcoal font-medium">
                     3. Choose Your Service
                   </h3>
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
+                    <label className="block text-xs uppercase tracking-wider font-sans font-bold text-charcoal/90 mb-2">
                       Desired Provision{' '}
                       <span className="text-red-600">*</span>
                     </label>
@@ -573,7 +573,7 @@ export default function Booking() {
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
-                      className={`w-full bg-ivory border px-4 py-3 text-xs text-charcoal focus:outline-none transition-colors ${
+                      className={`w-full bg-ivory border px-4 py-3 text-sm sm:text-base text-charcoal focus:outline-none transition-colors ${
                         errors.service
                           ? 'border-red-500'
                           : 'border-cream focus:border-forest'
@@ -605,8 +605,8 @@ export default function Booking() {
                     </select>
 
                     {errors.service && (
-                      <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1.5">
-                        <AlertCircle size={12} />
+                      <p className="flex items-center gap-1.5 text-xs text-red-600 font-medium mt-1.5">
+                        <AlertCircle size={14} />
                         {errors.service}
                       </p>
                     )}
@@ -620,12 +620,12 @@ export default function Booking() {
               {step === 4 && (
                 <div className="space-y-6">
 
-                  <h3 className="font-serif text-2xl text-charcoal">
+                  <h3 className="font-serif text-2xl sm:text-3xl text-charcoal font-medium">
                     4. Preferred Date or Schedule
                   </h3>
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
+                    <label className="block text-xs uppercase tracking-wider font-sans font-bold text-charcoal/90 mb-2">
                       Commencing Dates / Frequency{' '}
                       <span className="text-red-600">*</span>
                     </label>
@@ -635,7 +635,7 @@ export default function Booking() {
                       name="preferredDate"
                       value={formData.preferredDate}
                       onChange={handleChange}
-                      className={`w-full bg-ivory border px-4 py-3 text-xs text-charcoal focus:outline-none transition-colors ${
+                      className={`w-full bg-ivory border px-4 py-3 text-sm sm:text-base text-charcoal focus:outline-none transition-colors ${
                         errors.preferredDate
                           ? 'border-red-500 bg-red-50/20'
                           : 'border-cream focus:border-forest'
@@ -644,8 +644,8 @@ export default function Booking() {
                     />
 
                     {errors.preferredDate && (
-                      <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1.5">
-                        <AlertCircle size={12} />
+                      <p className="flex items-center gap-1.5 text-xs text-red-600 font-medium mt-1.5">
+                        <AlertCircle size={14} />
                         {errors.preferredDate}
                       </p>
                     )}
@@ -659,12 +659,12 @@ export default function Booking() {
               {step === 5 && (
                 <div className="space-y-6">
 
-                  <h3 className="font-serif text-2xl text-charcoal">
+                  <h3 className="font-serif text-2xl sm:text-3xl text-charcoal font-medium">
                     5. Additional Requirements
                   </h3>
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
+                    <label className="block text-xs uppercase tracking-wider font-sans font-bold text-charcoal/90 mb-2">
                       Specific Diet, Medication, or Sensitive Preferences
                     </label>
 
@@ -673,7 +673,7 @@ export default function Booking() {
                       name="requirements"
                       value={formData.requirements}
                       onChange={handleChange}
-                      className="w-full bg-ivory border border-cream px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-forest"
+                      className="w-full bg-ivory border border-cream px-4 py-3 text-sm sm:text-base text-charcoal focus:outline-none focus:border-forest"
                       placeholder="e.g. Raw diet routine, allergic to grain, prefers quiet woodland routes..."
                     />
                   </div>
@@ -684,20 +684,20 @@ export default function Booking() {
                   STEP 6
               ========================= */}
               {step === 6 && (
-                <div className="space-y-6 text-xs font-sans text-charcoal">
+                <div className="space-y-6 text-sm sm:text-base font-sans text-charcoal">
 
-                  <h3 className="font-serif text-2xl text-charcoal mb-2">
+                  <h3 className="font-serif text-2xl sm:text-3xl text-charcoal font-medium mb-2">
                     6. Review & Lodgement
                   </h3>
 
-                  <p className="text-charcoal/70 font-light leading-relaxed">
+                  <p className="text-charcoal/80 leading-relaxed">
                     Please review your booking details before lodging. Our
                     concierge director will coordinate an in-home acquaintance
                     visit.
                   </p>
 
                   {/* REVIEW */}
-                  <div className="bg-ivory p-6 border border-cream space-y-2.5">
+                  <div className="bg-ivory p-6 border border-cream space-y-3 text-sm sm:text-base">
 
                     <p>
                       <strong>Owner:</strong> {formData.name} ({formData.email})
@@ -742,17 +742,17 @@ export default function Booking() {
                   {/* TERMS */}
                   <div className="pt-2">
 
-                    <label className="flex items-start gap-2 cursor-pointer select-none">
+                    <label className="flex items-start gap-2.5 cursor-pointer select-none">
 
                       <input
                         type="checkbox"
                         name="termsAgreed"
                         checked={formData.termsAgreed}
                         onChange={handleChange}
-                        className="mt-0.5 accent-forest rounded-xs cursor-pointer"
+                        className="mt-1 w-4 h-4 accent-forest rounded-xs cursor-pointer"
                       />
 
-                      <span className="text-[11px] text-charcoal/80 leading-relaxed">
+                      <span className="text-xs sm:text-sm text-charcoal/85 leading-relaxed">
                         I agree to Paw & Pemberley's consultation terms and
                         confirm that my companion has up-to-date vaccinations.
                       </span>
@@ -760,8 +760,8 @@ export default function Booking() {
                     </label>
 
                     {errors.termsAgreed && (
-                      <p className="flex items-center gap-1 text-[11px] text-red-600 mt-1.5">
-                        <AlertCircle size={12} />
+                      <p className="flex items-center gap-1.5 text-xs text-red-600 font-medium mt-1.5">
+                        <AlertCircle size={14} />
                         {errors.termsAgreed}
                       </p>
                     )}
@@ -779,7 +779,7 @@ export default function Booking() {
                     type="button"
                     onClick={prevStep}
                     disabled={isSubmitting}
-                    className="px-6 py-2.5 border border-cream text-xs uppercase tracking-luxury text-charcoal hover:bg-cream/40 transition-colors disabled:opacity-50"
+                    className="px-7 py-3 border border-cream text-xs sm:text-sm uppercase tracking-wider font-semibold text-charcoal hover:bg-cream/40 transition-colors disabled:opacity-50"
                   >
                     Previous
                   </button>
@@ -791,7 +791,7 @@ export default function Booking() {
                   <button
                     type="button"
                     onClick={nextStep}
-                    className="px-8 py-3 bg-forest text-cream text-xs uppercase tracking-luxury font-medium hover:bg-forest/90 transition-colors"
+                    className="px-8 py-3.5 bg-forest text-cream text-xs sm:text-sm uppercase tracking-wider font-semibold hover:bg-forest/90 transition-colors"
                   >
                     Continue →
                   </button>
@@ -800,7 +800,7 @@ export default function Booking() {
                     type="button"
                     onClick={handleSubmit}
                     disabled={isSubmitting}
-                    className="px-8 py-3 bg-gold text-charcoal text-xs uppercase tracking-luxury font-medium hover:bg-gold-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="px-8 py-3.5 bg-gold text-charcoal text-xs sm:text-sm uppercase tracking-wider font-bold hover:bg-gold-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting
                       ? 'Sending...'
