@@ -1,13 +1,84 @@
 import React, { useState } from 'react';
 import SectionHeading from '../components/SectionHeading';
-import { Mail, Phone, MapPin, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    postcode: '',
+    petInfo: '',
+    service: 'Private Dog Walking',
+    message: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError('');
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(
+        'https://dogpet-1.onrender.com/api/contact',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            fullName: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            postcode: formData.postcode,
+            petInfo: formData.petInfo,
+            service: formData.service,
+            message: formData.message,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message || 'Unable to send your inquiry. Please try again.'
+        );
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error('❌ Contact submission error:', err);
+      setError(
+        err.message ||
+          'Something went wrong while sending your inquiry. Please try again.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const resetForm = () => {
+    setSubmitted(false);
+    setError('');
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      postcode: '',
+      petInfo: '',
+      service: 'Private Dog Walking',
+      message: '',
+    });
   };
 
   return (
@@ -72,9 +143,27 @@ export default function Contact() {
                 <p className="text-xs font-sans text-charcoal/70 max-w-md mx-auto">
                   Your inquiry has been received by our head of care. We will review your companion's details and reach out within 12 business hours.
                 </p>
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    onClick={resetForm}
+                    className="px-6 py-3 bg-charcoal text-cream text-xs uppercase tracking-wider font-semibold hover:bg-charcoal/80 transition-colors"
+                  >
+                    Send Another Inquiry
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {error && (
+                  <div className="border border-red-200 bg-red-50/60 px-4 py-3">
+                    <p className="flex items-center gap-2 text-xs text-red-600 font-medium">
+                      <AlertCircle size={16} />
+                      {error}
+                    </p>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
@@ -83,6 +172,9 @@ export default function Contact() {
                     <input
                       required
                       type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
                       className="w-full bg-ivory border border-cream px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-forest"
                       placeholder="e.g. Lady Clara Sterling"
                     />
@@ -94,6 +186,9 @@ export default function Contact() {
                     <input
                       required
                       type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       className="w-full bg-ivory border border-cream px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-forest"
                       placeholder="clara@residence.co.uk"
                     />
@@ -108,6 +203,9 @@ export default function Contact() {
                     <input
                       required
                       type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
                       className="w-full bg-ivory border border-cream px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-forest"
                       placeholder="+44 7..."
                     />
@@ -119,6 +217,9 @@ export default function Contact() {
                     <input
                       required
                       type="text"
+                      name="postcode"
+                      value={formData.postcode}
+                      onChange={handleChange}
                       className="w-full bg-ivory border border-cream px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-forest"
                       placeholder="e.g. SW1X or Cobham"
                     />
@@ -132,6 +233,9 @@ export default function Contact() {
                     </label>
                     <input
                       type="text"
+                      name="petInfo"
+                      value={formData.petInfo}
+                      onChange={handleChange}
                       className="w-full bg-ivory border border-cream px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-forest"
                       placeholder="e.g. Jasper (Canine / Labrador)"
                     />
@@ -140,7 +244,12 @@ export default function Contact() {
                     <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
                       Service Required
                     </label>
-                    <select className="w-full bg-ivory border border-cream px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-forest">
+                    <select
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      className="w-full bg-ivory border border-cream px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-forest"
+                    >
                       <option>Private Dog Walking</option>
                       <option>Home Pet Sitting</option>
                       <option>Luxury Boarding</option>
@@ -157,6 +266,9 @@ export default function Contact() {
                   </label>
                   <textarea
                     rows={4}
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     className="w-full bg-ivory border border-cream px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-forest"
                     placeholder="Tell us about your upcoming travel dates, routine requirements, or specific temperaments..."
                   />
@@ -164,9 +276,10 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full py-4 bg-forest text-cream text-xs uppercase tracking-luxury font-sans font-medium hover:bg-charcoal transition-colors"
+                  disabled={isSubmitting}
+                  className="w-full py-4 bg-forest text-cream text-xs uppercase tracking-luxury font-sans font-medium hover:bg-charcoal transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Request a Consultation
+                  {isSubmitting ? 'Sending...' : 'Request a Consultation'}
                 </button>
               </form>
             )}

@@ -772,26 +772,26 @@ export default function Booking() {
               {/* =========================
                   NAVIGATION
               ========================= */}
-              <div className="flex justify-between items-center mt-10 pt-6 border-t border-cream">
+              <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 mt-10 pt-6 border-t border-cream">
 
                 {step > 1 ? (
                   <button
                     type="button"
                     onClick={prevStep}
                     disabled={isSubmitting}
-                    className="px-7 py-3 border border-cream text-xs sm:text-sm uppercase tracking-wider font-semibold text-charcoal hover:bg-cream/40 transition-colors disabled:opacity-50"
+                    className="order-2 sm:order-1 flex-1 sm:flex-none sm:min-w-[160px] px-8 py-3.5 border border-cream text-xs sm:text-sm uppercase tracking-wider font-semibold text-charcoal hover:bg-cream/40 transition-colors disabled:opacity-50"
                   >
                     Previous
                   </button>
                 ) : (
-                  <div />
+                  <div className="hidden sm:block sm:flex-none sm:min-w-[160px]" />
                 )}
 
                 {step < 6 ? (
                   <button
                     type="button"
                     onClick={nextStep}
-                    className="px-8 py-3.5 bg-forest text-cream text-xs sm:text-sm uppercase tracking-wider font-semibold hover:bg-forest/90 transition-colors"
+                    className="order-1 sm:order-2 flex-1 sm:flex-none sm:min-w-[160px] px-8 py-3.5 bg-forest text-cream text-xs sm:text-sm uppercase tracking-wider font-semibold hover:bg-forest/90 transition-colors"
                   >
                     Continue →
                   </button>
@@ -800,7 +800,7 @@ export default function Booking() {
                     type="button"
                     onClick={handleSubmit}
                     disabled={isSubmitting}
-                    className="px-8 py-3.5 bg-gold text-charcoal text-xs sm:text-sm uppercase tracking-wider font-bold hover:bg-gold-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="order-1 sm:order-2 flex-1 sm:flex-none sm:min-w-[160px] px-8 py-3.5 bg-gold text-charcoal text-xs sm:text-sm uppercase tracking-wider font-bold hover:bg-gold-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting
                       ? 'Sending...'
