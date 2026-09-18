@@ -9,19 +9,23 @@ export default function Navbar() {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 25);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 25);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Route badalne par mobile drawer close karein
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Drawer khula ho to background scroll lock
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+
   const isHome = location.pathname === '/';
+  const light = isScrolled || !isHome; // light background => dark text
 
   const navLinks = [
     { label: 'Home', path: '/' },
@@ -33,68 +37,74 @@ export default function Navbar() {
     { label: 'Contact', path: '/contact' },
   ];
 
+  const isActivePath = (path) =>
+    path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out ${
         isScrolled
-          ? 'bg-[#F7F4EE]/95 backdrop-blur-md border-b border-[#EFE9DE] py-3.5 shadow-sm'
+          ? 'bg-[#F7F4EE]/95 backdrop-blur-md border-b border-[#EFE9DE] shadow-sm'
           : isHome
-          ? 'bg-gradient-to-b from-[#1E211E]/85 via-[#1E211E]/30 to-transparent py-5'
-          : 'bg-[#F7F4EE] border-b border-[#EFE9DE] py-4'
+          ? 'bg-gradient-to-b from-[#1E211E]/85 via-[#1E211E]/30 to-transparent'
+          : 'bg-[#F7F4EE] border-b border-[#EFE9DE]'
       }`}
+      style={{ paddingTop: isScrolled ? '0.85rem' : '1.15rem', paddingBottom: isScrolled ? '0.85rem' : '1.15rem' }}
     >
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 xl:px-12 flex items-center justify-between gap-6">
-        
-        {/* 1. Brand Logo / Crest (Left) */}
-        <Link to="/" className="group flex flex-col shrink-0 select-none">
+      <div
+        className="mx-auto flex max-w-[1500px] items-center justify-between px-5 sm:px-7 xl:px-10"
+        style={{ gap: 'clamp(0.75rem, 2vw, 2.5rem)' }}
+      >
+        {/* 1. Brand Logo */}
+        <Link to="/" className="group flex min-w-0 shrink flex-col select-none">
           <span
-            className={`font-serif text-2xl sm:text-3xl tracking-[0.18em] font-medium transition-colors duration-300 leading-tight ${
-              isScrolled || !isHome ? 'text-[#1E211E]' : 'text-white'
+            className={`whitespace-nowrap font-serif font-medium leading-tight transition-colors duration-300 ${
+              light ? 'text-[#1E211E]' : 'text-white'
             }`}
+            style={{ fontSize: 'clamp(1.05rem, 1.7vw, 1.85rem)', letterSpacing: 'clamp(0.06em, 0.14vw, 0.18em)' }}
           >
-            PAW & PEMBERLEY
+            PAW &amp; PEMBERLEY
           </span>
           <span
-            style={{ fontSize: '12px' }}
-            className={`uppercase tracking-[0.2em] font-sans font-semibold transition-colors duration-300 mt-1 ${
-              isScrolled || !isHome ? 'text-[#7B8875]' : 'text-[#EFE9DE]'
+            className={`mt-1 whitespace-nowrap font-sans font-semibold uppercase transition-colors duration-300 ${
+              light ? 'text-[#7B8875]' : 'text-[#EFE9DE]'
             }`}
+            style={{ fontSize: 'clamp(0.56rem, 0.72vw, 0.75rem)', letterSpacing: 'clamp(0.1em, 0.16vw, 0.2em)' }}
           >
             Private Pet Care • Est. 2018
           </span>
         </Link>
 
-        {/* 2. Desktop Navigation (Center) */}
-        <nav 
-          style={{ fontSize: '13.5px' }}
-          className="hidden xl:flex items-center space-x-7 2xl:space-x-9 uppercase tracking-[0.16em] font-sans font-semibold"
+        {/* 2. Desktop Navigation — saare links, har width pe */}
+        <nav
+          className="hidden shrink-0 items-center font-sans font-semibold uppercase lg:flex"
+          style={{
+            gap: 'clamp(0.85rem, 1.55vw, 2.25rem)',
+            fontSize: 'clamp(0.66rem, 0.84vw, 0.85rem)',
+            letterSpacing: 'clamp(0.06em, 0.12vw, 0.16em)',
+          }}
         >
           {navLinks.map((item) => {
-            const isActive =
-              item.path === '/'
-                ? location.pathname === '/'
-                : location.pathname.startsWith(item.path);
-
-            const textStyle =
-              isScrolled || !isHome
-                ? isActive
-                  ? 'text-[#354438] font-bold'
-                  : 'text-[#1E211E]/85 hover:text-[#1E211E]'
-                : isActive
-                ? 'text-white font-bold'
-                : 'text-white/90 hover:text-white';
+            const isActive = isActivePath(item.path);
+            const textStyle = light
+              ? isActive
+                ? 'text-[#354438] font-bold'
+                : 'text-[#1E211E]/85 hover:text-[#1E211E]'
+              : isActive
+              ? 'text-white font-bold'
+              : 'text-white/90 hover:text-white';
 
             return (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`relative py-2 transition-colors duration-200 ${textStyle}`}
+                className={`relative whitespace-nowrap py-2 transition-colors duration-200 ${textStyle}`}
               >
-                <span>{item.label}</span>
+                {item.label}
                 {isActive && (
                   <span
-                    className={`absolute bottom-0 left-0 right-0 h-[2px] transition-all duration-300 ${
-                      isScrolled || !isHome ? 'bg-[#354438]' : 'bg-[#D4BF95]'
+                    className={`absolute bottom-0 left-0 right-0 h-[2px] ${
+                      light ? 'bg-[#354438]' : 'bg-[#D4BF95]'
                     }`}
                   />
                 )}
@@ -103,63 +113,31 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* 3. Actions / CTA Button (Right) */}
-        <div className="hidden xl:flex items-center space-x-4 shrink-0">
-          <Link
-            to="/booking"
-            style={{ fontSize: '13px' }}
-            className={`px-6 py-3 uppercase tracking-[0.16em] font-sans font-bold transition-all duration-300 border ${
-              isScrolled || !isHome
-                ? 'bg-[#354438] text-[#F7F4EE] border-[#354438] hover:bg-[#1E211E] hover:border-[#1E211E]'
-                : 'bg-white/15 text-white border-white/60 hover:bg-white hover:text-[#1E211E] backdrop-blur-sm shadow-sm'
-            }`}
-          >
-            Book a Consultation
-          </Link>
-        </div>
-
-        {/* Medium Laptop / Tablet Screen Navigation */}
-        <div 
-          style={{ fontSize: '13px' }}
-          className="hidden lg:flex xl:hidden items-center space-x-6 uppercase tracking-[0.14em] font-sans font-semibold"
+        {/* 3. CTA */}
+        <Link
+          to="/booking"
+          className={`hidden shrink-0 whitespace-nowrap border font-sans font-bold uppercase transition-all duration-300 lg:inline-block ${
+            light
+              ? 'bg-[#354438] text-[#F7F4EE] border-[#354438] hover:bg-[#1E211E] hover:border-[#1E211E]'
+              : 'bg-white/15 text-white border-white/60 backdrop-blur-sm shadow-sm hover:bg-white hover:text-[#1E211E]'
+          }`}
+          style={{
+            fontSize: 'clamp(0.64rem, 0.8vw, 0.82rem)',
+            letterSpacing: 'clamp(0.06em, 0.12vw, 0.16em)',
+            padding: 'clamp(0.6rem, 0.8vw, 0.8rem) clamp(0.9rem, 1.6vw, 1.5rem)',
+          }}
         >
-          {navLinks.slice(0, 5).map((item) => {
-            const isActive =
-              item.path === '/'
-                ? location.pathname === '/'
-                : location.pathname.startsWith(item.path);
+          Book a Consultation
+        </Link>
 
-            const textStyle =
-              isScrolled || !isHome
-                ? isActive ? 'text-[#354438] font-bold' : 'text-[#1E211E]/85 hover:text-[#1E211E]'
-                : isActive ? 'text-white font-bold' : 'text-white/90 hover:text-white';
-
-            return (
-              <Link key={item.path} to={item.path} className={textStyle}>
-                {item.label}
-              </Link>
-            );
-          })}
-          <Link
-            to="/booking"
-            style={{ fontSize: '12px' }}
-            className={`px-4 py-2 uppercase tracking-wider font-sans font-bold border ${
-              isScrolled || !isHome
-                ? 'bg-[#354438] text-white border-[#354438]'
-                : 'bg-white/20 text-white border-white/60'
-            }`}
-          >
-            Consultation
-          </Link>
-        </div>
-
-        {/* Mobile / Small Laptop Menu Toggle */}
+        {/* Mobile toggle */}
         <button
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle Navigation Menu"
-          className={`lg:hidden p-2 transition-colors focus:outline-none ${
-            isScrolled || !isHome ? 'text-[#1E211E]' : 'text-white'
+          aria-expanded={mobileMenuOpen}
+          className={`shrink-0 p-2 transition-colors focus:outline-none lg:hidden ${
+            light ? 'text-[#1E211E]' : 'text-white'
           }`}
         >
           {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
@@ -174,45 +152,33 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="lg:hidden bg-[#F7F4EE] border-b border-[#EFE9DE] px-8 py-8 shadow-xl overflow-hidden"
+            className="overflow-hidden border-b border-[#EFE9DE] bg-[#F7F4EE] shadow-xl lg:hidden"
           >
-            <nav 
-              style={{ fontSize: '15px' }}
-              className="flex flex-col space-y-4 uppercase tracking-widest font-sans font-semibold"
-            >
-              {navLinks.map((item) => {
-                const isActive =
-                  item.path === '/'
-                    ? location.pathname === '/'
-                    : location.pathname.startsWith(item.path);
+            <nav className="flex max-h-[75svh] flex-col gap-4 overflow-y-auto px-7 py-7 font-sans text-[15px] font-semibold uppercase tracking-widest">
+              {navLinks.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`py-1.5 transition-colors ${
+                    isActivePath(item.path)
+                      ? 'text-[#354438] font-bold'
+                      : 'text-[#1E211E] hover:text-[#354438]'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
 
-                return (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={`transition-colors py-1.5 ${
-                      isActive ? 'text-[#354438] font-bold' : 'text-[#1E211E] hover:text-[#354438]'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-
-              <div className="pt-5 border-t border-[#EFE9DE] flex flex-col gap-3.5">
+              <div className="flex flex-col gap-3.5 border-t border-[#EFE9DE] pt-5">
                 <Link
                   to="/booking"
-                  style={{ fontSize: '14px' }}
-                  className="text-center w-full py-3.5 bg-[#354438] text-[#F7F4EE] uppercase tracking-wider font-sans font-bold hover:bg-[#1E211E] transition-colors"
+                  className="w-full bg-[#354438] py-3.5 text-center text-[14px] font-bold uppercase tracking-wider text-[#F7F4EE] transition-colors hover:bg-[#1E211E]"
                 >
                   Book a Consultation
                 </Link>
-                <div 
-                  style={{ fontSize: '13px' }}
-                  className="flex items-center justify-center gap-2 text-[#7B8875] font-medium"
-                >
+                <div className="flex items-center justify-center gap-2 text-[13px] font-medium normal-case tracking-normal text-[#7B8875]">
                   <ShieldCheck size={16} />
-                  <span>Licensed, Insured & DBS Vetted</span>
+                  <span>Licensed, Insured &amp; DBS Vetted</span>
                 </div>
               </div>
             </nav>

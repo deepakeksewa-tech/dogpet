@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 // Layout
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTopButton from './components/ScrollToTopButton'; // 👈 naya import
 
 // Pages
 import Home from './pages/Home';
@@ -46,6 +47,7 @@ export default function App() {
           </Routes>
         </main>
         <Footer />
+        <ScrollToTopButton /> {/* 👈 yeh add kiya */}
       </div>
     </Router>
   );
