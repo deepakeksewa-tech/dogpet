@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, ShieldCheck, X, Phone, Mail, MapPin } from 'lucide-react';
+import { ShieldCheck, X, Phone, Mail, MapPin } from 'lucide-react';
 
 export default function Footer() {
   const [activeModal, setActiveModal] = useState(null); // 'privacy' | 'terms' | 'imprint' | null
@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-cream/15">
             {/* Brand Column */}
-            <div className="md:col-span-4 space-y-4">
+            <div className="md:col-span-5 space-y-4">
               <div>
                 <span className="font-serif text-2xl tracking-[0.2em] text-white block">
                   PAW & PEMBERLEY
@@ -39,7 +39,7 @@ export default function Footer() {
             </div>
 
             {/* Navigation - Synced with App.jsx Routes */}
-            <div className="md:col-span-2 space-y-3">
+            <div className="md:col-span-3 space-y-3">
               <p 
                 style={{ fontSize: '14px' }} 
                 className="font-sans font-bold tracking-widest text-gold uppercase"
@@ -60,7 +60,7 @@ export default function Footer() {
             </div>
 
             {/* Contact Details */}
-            <div className="md:col-span-3 space-y-3">
+            <div className="md:col-span-4 space-y-3">
               <p 
                 style={{ fontSize: '14px' }} 
                 className="font-sans font-bold tracking-widest text-gold uppercase"
@@ -81,12 +81,7 @@ export default function Footer() {
                     +44 7791 000000
                   </a>
                 </p>
-                <p className="flex items-center gap-2">
-                  <Mail size={15} className="text-gold-light shrink-0" />
-                  <a href="mailto:info@pawandpemberley.com" className="hover:text-white transition-colors">
-                    info@pawandpemberley.com
-                  </a>
-                </p>
+                
               </div>
 
               <div 
@@ -95,40 +90,9 @@ export default function Footer() {
               >
                 <p className="flex items-start gap-1.5">
                   <MapPin size={15} className="text-gold-light shrink-0 mt-0.5" />
-                  <span>United Kingdom & European Operations</span>
+                  <span>9b The Broadway, Woodford Green, Essex, IG8 0HL</span>
                 </p>
               </div>
-            </div>
-
-            {/* Newsletter Subscription */}
-            <div className="md:col-span-3 space-y-3">
-              <p 
-                style={{ fontSize: '14px' }} 
-                className="font-sans font-bold tracking-widest text-gold uppercase"
-              >
-                The Pemberley Journal
-              </p>
-              <p 
-                style={{ fontSize: '14px' }} 
-                className="font-sans text-cream/80 leading-relaxed"
-              >
-                Subscribe to receive seasonal pet care advisories, private updates, and regional journal dispatches.
-              </p>
-              <form onSubmit={(e) => e.preventDefault()} className="flex pt-1">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  style={{ fontSize: '14px' }}
-                  className="bg-cream/10 border border-cream/25 px-3.5 py-2.5 text-white placeholder-cream/50 focus:outline-none focus:border-gold w-full"
-                />
-                <button
-                  type="submit"
-                  aria-label="Subscribe to journal"
-                  className="bg-gold px-4 text-charcoal hover:bg-gold-light transition-colors flex items-center justify-center"
-                >
-                  <ArrowUpRight size={18} />
-                </button>
-              </form>
             </div>
           </div>
 
@@ -223,7 +187,7 @@ export default function Footer() {
                       1. Joint Data Controllers & Operations
                     </p>
                     <p>
-                      <strong>United Kingdom:</strong> Paw & Pemberley UK, represented by Vijay Bhalla (Contact: <em>info@pawandpemberley.com</em>).<br />
+                      <strong>United Kingdom:</strong> Paw & Pemberley UK, represented by Vijay Bhalla, 9b The Broadway, Woodford Green, Essex, IG8 0HL (Contact: <em>info@pawandpemberley.com</em>).<br />
                       <strong>European Union / Headquarters:</strong> Atsewa GmbH, Gerhardusgasse 29/15, 1200 Vienna, Austria (Corporate Contact: <em>info@atsewa.com</em>).
                     </p>
                   </div>
@@ -343,6 +307,7 @@ export default function Footer() {
                     </p>
                     <p><strong>Trading Name:</strong> Paw & Pemberley UK (Private Pet Care • Est. 2018)</p>
                     <p><strong>Regional Director / Representative:</strong> Vijay Bhalla</p>
+                    <p><strong>Operating Address:</strong> 9b The Broadway, Woodford Green, Essex, IG8 0HL</p>
                     <p><strong>Contact Telephone:</strong> +44 7791 000000</p>
                     <p><strong>Direct Email:</strong> info@pawandpemberley.com</p>
                     <p><strong>Operating Territory:</strong> United Kingdom (England & Wales)</p>

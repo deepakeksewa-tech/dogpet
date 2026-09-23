@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import SectionHeading from '../components/SectionHeading';
 import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 
 export default function Contact() {
@@ -84,11 +83,21 @@ export default function Contact() {
   return (
     <div className="pt-28 pb-24 bg-ivory">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <SectionHeading
-          eyebrow="Initiate Contact"
-          title="Let’s talk about their care."
-          subtitle="Tell us a little about your companion and what exceptional care looks like for you."
-        />
+        
+        {/* Header Section: Exact Match with Site Hierarchy */}
+        <div className="mb-14 max-w-4xl">
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#8C6D23] font-medium tracking-tight leading-none mb-3">
+            Initiate Contact
+          </h1>
+
+          <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-charcoal font-normal leading-snug mb-3">
+            Let’s talk about their care.
+          </h2>
+
+          <p className="font-sans text-xs sm:text-sm text-charcoal/70 font-light leading-relaxed max-w-xl">
+            Tell us a little about your companion and what exceptional care looks like for you.
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Details */}
@@ -98,14 +107,14 @@ export default function Contact() {
                 <span className="text-[10px] font-sans font-semibold tracking-widest text-gold uppercase block mb-1">
                   Private Liaison
                 </span>
-                <p className="font-serif text-xl text-charcoal">Paw & Pemberley Concierge</p>
+                <p className="font-serif text-xl text-charcoal">Paw &amp; Pemberley Concierge</p>
               </div>
 
               <div className="flex items-start gap-4 text-xs font-sans text-charcoal/80">
                 <MapPin size={18} className="text-forest shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-medium text-charcoal">London Environs</p>
-                  <p>42 Berkeley Square, Mayfair, London, W1J 5AW</p>
+                  <p className="font-medium text-charcoal">United Kingdom Operations</p>
+                  <p>9b The Broadway, Woodford Green, Essex, IG8 0HL</p>
                 </div>
               </div>
 
@@ -113,7 +122,11 @@ export default function Contact() {
                 <Phone size={18} className="text-forest shrink-0 mt-0.5" />
                 <div>
                   <p className="font-medium text-charcoal">Telephone</p>
-                  <p>+44 (0) 20 7946 0123</p>
+                  <p>
+                    <a href="tel:+447791000000" className="hover:text-forest transition-colors">
+                      +44 7791 000000
+                    </a>
+                  </p>
                 </div>
               </div>
 
@@ -121,7 +134,7 @@ export default function Contact() {
                 <Mail size={18} className="text-forest shrink-0 mt-0.5" />
                 <div>
                   <p className="font-medium text-charcoal">Electronic Dispatch</p>
-                  <p>hello@pawandpemberley.co.uk</p>
+                  
                 </div>
               </div>
             </div>
@@ -221,7 +234,7 @@ export default function Contact() {
                       value={formData.postcode}
                       onChange={handleChange}
                       className="w-full bg-ivory border border-cream px-4 py-3 text-xs text-charcoal focus:outline-none focus:border-forest"
-                      placeholder="e.g. SW1X or Cobham"
+                      placeholder="e.g. SW1X or Woodford Green"
                     />
                   </div>
                 </div>
@@ -229,7 +242,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
-                      Pet Name & Type
+                      Pet Name &amp; Type
                     </label>
                     <input
                       type="text"
@@ -253,7 +266,7 @@ export default function Contact() {
                       <option>Private Dog Walking</option>
                       <option>Home Pet Sitting</option>
                       <option>Luxury Boarding</option>
-                      <option>Grooming & Spa</option>
+                      <option>Grooming &amp; Spa</option>
                       <option>Puppy Care</option>
                       <option>Bespoke Concierge</option>
                     </select>
@@ -262,7 +275,7 @@ export default function Contact() {
 
                 <div>
                   <label className="block text-[11px] uppercase tracking-widest font-sans text-charcoal/80 mb-2">
-                    Preferred Date & Message
+                    Preferred Date &amp; Message
                   </label>
                   <textarea
                     rows={4}

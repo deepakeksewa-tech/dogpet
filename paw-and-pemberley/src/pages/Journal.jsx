@@ -1,17 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SectionHeading from '../components/SectionHeading';
 import { JOURNAL_POSTS } from '../data/siteData';
 
 export default function Journal() {
   return (
     <div className="pt-28 pb-24 bg-ivory">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <SectionHeading
-          eyebrow="The Pemberley Journal"
-          title="Dispatches on British Pet Life"
-          subtitle="Care guides, behavioural etiquette, and seasonal countryside itineraries."
-        />
+        
+        {/* Header Section: Exact Match with Site Hierarchy */}
+        <div className="mb-14 max-w-4xl">
+          {/* Main Hero: Serif, Dark Rich Gold & Primary Focus */}
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#8C6D23] font-medium tracking-tight leading-none mb-3">
+            The Pemberley Journal
+          </h1>
+
+          {/* Subheading: Balanced size */}
+          <h2 className="font-serif text-xl sm:text-2xl md:text-3xl text-charcoal font-normal leading-snug mb-3">
+            Dispatches on British Pet Life
+          </h2>
+
+          {/* Subtitle */}
+          <p className="font-sans text-xs sm:text-sm text-charcoal/70 font-light leading-relaxed max-w-xl">
+            Care guides, behavioural etiquette, and seasonal countryside itineraries.
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {JOURNAL_POSTS.map((post) => (
