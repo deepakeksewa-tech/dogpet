@@ -7,7 +7,7 @@ import { SERVICES, TESTIMONIALS, JOURNAL_POSTS } from '../data/siteData';
 
 // Local Assets Imports
 import p1 from '../assets/p1.webp';
-import dog1 from '../assets/dog1.webp';
+import dog1 from '../assets/dog1.mp4';
 import dog2 from '../assets/dog2.webp';
 import dog3 from '../assets/dog3.webp';
 
@@ -17,10 +17,13 @@ export default function Home() {
       {/* 1. CINEMATIC HERO */}
       <section className="relative h-screen w-full flex items-center justify-center text-center px-6">
         <div className="absolute inset-0 z-0">
-          <img
-            src={dog1}
-            alt="Noble companion on British lawn"
-            className="w-full h-full object-cover object-center filter brightness-[0.75] contrast-[1.05]"
+         <video
+      src={dog1}
+      autoPlay
+      muted
+      loop
+      playsInline
+      className="w-full h-full object-cover object-center filter brightness-[0.75] contrast-[1.05]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-charcoal/40" />
         </div>
