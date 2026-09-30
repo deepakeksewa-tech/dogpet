@@ -393,13 +393,13 @@ export default function Home() {
               key={idx}
               className="bg-cream/30 p-5 sm:p-6 border border-cream flex flex-col justify-between"
             >
-              <p className="font-serif text-sm sm:text-base text-charcoal italic leading-relaxed mb-5">
+              <p className="font-serif text-lg sm:text-lg text-charcoal italic leading-relaxed mb-5">
                 “{t.quote}”
               </p>
               <div className="border-t border-cream pt-3.5">
-                <p className="font-sans font-bold text-xs sm:text-sm text-charcoal tracking-wide">{t.client}</p>
-                <p className="font-sans text-xs text-sage font-medium mt-0.5">{t.location}</p>
-                <p className="font-sans text-[11px] sm:text-xs text-charcoal/70 italic mt-0.5">Companion: {t.pet}</p>
+                <p className="font-sans font-bold text-base sm:text-base text-charcoal tracking-wide">{t.client}</p>
+                <p className="font-sans text-base text-sage font-medium mt-0.5">{t.location}</p>
+                <p className="font-sans text-sm sm:text-sm text-charcoal/70 italic mt-0.5">Companion: {t.pet}</p>
               </div>
             </div>
           ))}
